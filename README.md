@@ -1,11 +1,17 @@
-crAss
------
+# crAss-RPKM
+
+A version of crAss (cross assembly) modified to support RPKM (Reads Per Kilobase per Million mapped reads).
+
+This is particularly useful in viral metagenomics, and can be used to generate normalized heatmaps of contigs.
+
+
+## Derived from crAss
+
+This is derived from the original GPLv3 licensed code from:
 Reference-independent comparative metagenomics using cross-assembly: crAss
 Bas E. Dutilh et al. 2012
 
-
-USAGE
------
+### Usage
 Run crAss as follows:
 perl crAss.pl input_directory
 
@@ -17,8 +23,7 @@ identifiers should be unique across all the files.
 For further info please visit the crAss website at http://edwards.sdsu.edu/crass/
 
 
-DEPENDENCIES
-------------
+### Dependencies
 The PERL script calls the following programs:
 - BioNJ        http://www.atgc-montpellier.fr/bionj/
 - GNUPlot      http://www.gnuplot.info/
@@ -28,9 +33,9 @@ Make sure these programs are available and executable from your command line, in
 the same directory as crAss.pl.
 
 
-COPYRIGHT AND LICENSE
----------------------
-Copyright (C) 2012  Bas E. Dutilh
+### License (GPLv3)
+Copyright (C) 2012 Nick Semenkovich (@semenko) <semenko@alum.mit.edu>, Gordon Lab, Washington University School of Medicine in St. Louis
+Copyright (C) 2012 Bas E. Dutilh
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software

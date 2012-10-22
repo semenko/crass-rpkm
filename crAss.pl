@@ -1,10 +1,12 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
+use warnings;
 use strict;
 use Math::Trig;
 use Data::Dumper;
 
 # crAss version 1.1-RPKM
-# (c) 2012, Nicholas P. Semenkovich <semenko@alum.mit.edu>
+# (c) 2012, Nicholas P. Semenkovich (@semenko) <semenko@alum.mit.edu> Gordon Lab, Washington University School of Medicine in St. Louis
+# (c) 2012 Bas E. Dutilh
 #
 # Derived from the original crAss v1.1 by:
 # (c) Bas E. Dutilh, Robert Schmieder, Jim Nulton, Ben Felts, Peter Salamon, Robert A. Edwards and John L. Mokili
@@ -95,6 +97,7 @@ for (my $f = 0; $f < scalar @reads_files; ++$f) {
 	    $read2sample{$1} = $f; }
 	else {
 	    # semenko: added length calculations
+	    # WARNING: MAY NOT BE VALID WITH FASTQ FILES
 	    # Validated with: grep -Fv ">" | tr -d '\n' | wc -m
 	    chomp($line);
 	    $total_length += length($line);
@@ -364,28 +367,28 @@ else {
 # F - Font type
 # C - font height (relative)
 # Y - Finish
-	if(-e "$ARGV[0]/output.$size_correction.cladogram.ph" && 0) {
-	    #use branch length
-	    system ("cd $ARGV[0];rm -f plotfile;echo \"output.$size_correction.cladogram.ph\\nV\\nN\\nL\\nA\\nD\\nM\\n0\\n0\\nF\\nHelvetica\\nC\\n0.5\\nY\\n\" | phylip drawtree") == 0
-		or die "ERROR: phylip drawtree (with branch length) system call failed: $?";
-	    #create png file from tree using ghostscript
-	    if (-e "$ARGV[0]/plotfile") {
-		system ("cd $ARGV[0];gs -q -dBATCH -dNOPAUSE -r72 -sOutputFile=output.$size_correction.image.png -sDEVICE=pnggray -dTextAlphaBits=4 -dGraphicsAlphaBits=4 plotfile") == 0
-		    or die "ERROR: ghostscript (with branch length) system call failed: $?"; }
-	    else {
-		die "ERROR: missing plotfile.\n"; }
-	    #ignore branch length
-	    system ("cd $ARGV[0];rm -f plotfile;echo \"output.$size_correction.cladogram.ph\\nV\\nN\\nL\\nA\\nD\\nM\\n0\\n0\\nF\\nHelvetica\\nC\\n0.5\\nB\\nY\\n\" | phylip drawtree") == 0
-		or die "ERROR: phylip drawtree (no branch length) system call failed: $?";
-	    #create png file from tree using ghostscript
-	    if (-e "$ARGV[0]/plotfile") {
-		system ("cd $ARGV[0];gs -q -dBATCH -dNOPAUSE -r72 -sOutputFile=output.$size_correction.image2.png -sDEVICE=pnggray -dTextAlphaBits=4 -dGraphicsAlphaBits=4 plotfile") == 0
-		    or die "ERROR: ghostscript (no branch length) system call failed: $?"; }
-	    else {
-		die "ERROR: missing plotfile.\n"; } }
-	else {
-	    # die "ERROR: missing tree data file.\n";
-	}
+#	if(-e "$ARGV[0]/output.$size_correction.cladogram.ph" && 0) {
+#	    #use branch length
+#	    system ("cd $ARGV[0];rm -f plotfile;echo \"output.$size_correction.cladogram.ph\\nV\\nN\\nL\\nA\\nD\\nM\\n0\\n0\\nF\\nHelvetica\\nC\\n0.5\\nY\\n\" | phylip drawtree") == 0
+#		or die "ERROR: phylip drawtree (with branch length) system call failed: $?";
+#	    #create png file from tree using ghostscript
+#	    if (-e "$ARGV[0]/plotfile") {
+#		system ("cd $ARGV[0];gs -q -dBATCH -dNOPAUSE -r72 -sOutputFile=output.$size_correction.image.png -sDEVICE=pnggray -dTextAlphaBits=4 -dGraphicsAlphaBits=4 plotfile") == 0
+#		    or die "ERROR: ghostscript (with branch length) system call failed: $?"; }
+#	    else {
+#		die "ERROR: missing plotfile.\n"; }
+#	    #ignore branch length
+#	    system ("cd $ARGV[0];rm -f plotfile;echo \"output.$size_correction.cladogram.ph\\nV\\nN\\nL\\nA\\nD\\nM\\n0\\n0\\nF\\nHelvetica\\nC\\n0.5\\nB\\nY\\n\" | phylip drawtree") == 0
+#		or die "ERROR: phylip drawtree (no branch length) system call failed: $?";
+#	    #create png file from tree using ghostscript
+#	    if (-e "$ARGV[0]/plotfile") {
+#		system ("cd $ARGV[0];gs -q -dBATCH -dNOPAUSE -r72 -sOutputFile=output.$size_correction.image2.png -sDEVICE=pnggray -dTextAlphaBits=4 -dGraphicsAlphaBits=4 plotfile") == 0
+#		    or die "ERROR: ghostscript (no branch length) system call failed: $?"; }
+#	    else {
+#		die "ERROR: missing plotfile.\n"; } }
+#	else {
+#	    # die "ERROR: missing tree data file.\n";
+#	}
     }
 }
 
